@@ -22,7 +22,7 @@
             min-height: 100vh;
             height: 100vh; /* Set explicit height */
             width: 100%;
-            padding: 2rem 1.5rem; 
+            padding: 2rem 1.5rem 8rem 1.5rem; /* Added bottom padding for nav */
             align-items: center;
             justify-content: center;
             position: relative;
@@ -325,16 +325,14 @@
     </div>
 
     <!-- Navigation -->
-    <div class="fixed top-1/2 right-0 transform -translate-y-1/2 p-2 sm:p-4 flex flex-col items-center space-y-2 sm:space-y-4 pointer-events-none">
-        <div class="pointer-events-auto">
-            <button id="prev-btn" class="bg-black bg-opacity-50 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center hover:bg-opacity-75 disabled:opacity-30 disabled:cursor-not-allowed transition-opacity">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /></svg>
+    <div class="fixed bottom-0 left-0 right-0 flex justify-center p-4 pointer-events-none">
+        <div class="flex items-center space-x-4 bg-black bg-opacity-50 backdrop-blur-sm p-2 rounded-full pointer-events-auto">
+            <button id="prev-btn" class="text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
             </button>
-        </div>
-        <div id="slide-counter" class="text-xs sm:text-sm bg-black bg-opacity-50 text-white px-3 py-1 rounded-full pointer-events-auto font-mono">1/12</div>
-        <div class="pointer-events-auto">
-            <button id="next-btn" class="bg-black bg-opacity-50 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center hover:bg-opacity-75 disabled:opacity-30 disabled:cursor-not-allowed transition-opacity">
-                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            <div id="slide-counter" class="text-sm text-white px-3 py-1 font-mono">1/12</div>
+            <button id="next-btn" class="text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
             </button>
         </div>
     </div>
