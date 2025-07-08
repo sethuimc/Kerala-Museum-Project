@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-MIEL: Project Pitch Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles are mobile-first */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* bg-gray-900 */
+            color: #D1D5DB; /* text-gray-300 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .slide {
+            display: none;
+            min-height: 100vh;
+            width: 100%;
+            padding: 6rem 1.5rem; 
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-direction: column;
+        }
+        @media (min-width: 768px) {
+            .slide {
+                padding: 5rem 2rem;
+            }
+        }
+        .slide.active {
+            display: flex;
+        }
+        .font-display {
+            font-family: 'DM Serif Display', serif;
+        }
+        .text-accent { color: #FBBF24; } /* text-amber-400 */
+        .bg-accent { background-color: #FBBF24; }
+        .border-accent { border-color: #FBBF24; }
+        .bg-card { background-color: #1F2937; } /* bg-gray-800 */
+        .border-card { border-color: #374151; } /* border-gray-700 */
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide.active {
+            animation: fadeIn 0.7s ease-out;
+        }
+        .reveal-item {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, margin-top 0.5s ease-in-out;
+        }
+        .reveal-item.revealed {
+            max-height: 300px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+        .clickable-card {
+            cursor: pointer;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .clickable-card:hover {
+            border-color: #FBBF24; /* border-amber-400 */
+            transform: translateY(-4px);
+        }
+        .footer-credit {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: #4B5563; /* text-gray-600 */
+        }
+        .plus-icon {
+            transition: transform 0.3s ease;
+        }
+        .plus-icon.open {
+            transform: rotate(45deg);
+        }
+        .stagger-reveal > * {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.5s forwards;
+        }
+    </style>
+</head>
+<body class="overflow-hidden">
+
+    <div id="presentation-container" class="relative">
+        <!-- Slide 1: Title & Author -->
+        <div id="slide-1" class="slide active justify-center items-center text-center">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl mb-4 text-white">K-MIEL</h1>
+                <p class="text-xl sm:text-2xl md:text-3xl mb-12 text-gray-300 font-light">Kerala Museum Innovation & Experience Lab</p>
+                <div class="border-t border-gray-700 pt-8 md:pt-10">
+                    <p class="text-md md:text-lg font-light text-gray-400 mb-2">A Proposal By</p>
+                    <h2 class="text-2xl md:text-4xl font-display text-white">Sethu S Kumar</h2>
+                    <p class="text-lg md:text-xl font-semibold text-accent mt-3">ICOM IMREC Research Fellow in Digital Leadership</p>
+                    <div class="font-light text-gray-400 mt-3 text-sm md:text-base space-y-1">
+                        <p>Research Scholar (UGC-JRF), Indian Institute of Heritage</p>
+                        <p>Founder & Curatorial/Digital Strategist, Interactive Museum Consultants Pvt. Ltd.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-credit">© 2025 Sethu S Kumar. All Rights Reserved.</div>
+        </div>
+
+        <!-- Slide 2: The Hook -->
+        <div id="slide-2" class="slide justify-center items-center text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-display text-4xl md:text-6xl text-white mb-6">A Disturbing Question</h2>
+                <p class="text-lg md:text-2xl leading-relaxed mb-8 text-gray-300">Across Kerala, many of our own citizens are unaware of the museums in their vicinity.</p>
+                <p class="text-3xl md:text-5xl font-bold text-accent p-6 bg-card rounded-lg shadow-lg">Who are our museums for?</p>
+            </div>
+             <div class="footer-credit">K-MIEL Proposal</div>
+        </div>
+
+        <!-- Slide 3: The Core Problem -->
+        <div id="slide-3" class="slide justify-center items-center text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-display text-4xl md:text-6xl text-white mb-6">The Foundational Flaw</h2>
+                <div class="bg-card p-8 md:p-12 rounded-lg shadow-xl border border-card">
+                    <p class="text-xl md:text-3xl font-semibold text-accent mb-4">"Our thinking about museums concludes with their construction, when it should begin there."</p>
+                    <p class="text-lg md:text-2xl font-light text-gray-200">We treat a museum as a finished <span class="font-semibold text-white">product</span>, not as an active <span class="font-semibold text-white">process</span> and a vital <span class="font-semibold text-white">social function</span>.</p>
+                </div>
+            </div>
+             <div class="footer-credit">K-MIEL Proposal</div>
+        </div>
+
+        <!-- Slide 4: The Cause & Consequences -->
+        <div id="slide-4" class="slide justify-center items-center">
+             <div class="max-w-6xl mx-auto w-full">
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-white text-center mb-12">The Crisis & Its Consequences</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-card border border-card p-8 rounded-lg shadow-lg flex flex-col justify-center">
+                        <h3 class="font-display text-2xl sm:text-3xl mb-3 text-accent">Root Cause</h3>
+                        <p class="text-lg sm:text-xl font-semibold text-white mb-4">The Colonial Mindset</p>
+                        <p class="font-light text-gray-300">This is not history; it is the active cause of our current dysfunction. It prioritizes objects over people, authority over dialogue, and preservation over participation, creating exclusionary histories.</p>
+                    </div>
+                    <div id="effects-container" class="space-y-4">
+                        <div class="bg-card border border-card p-6 rounded-lg shadow-md clickable-card" data-target="effect-1">
+                            <h3 class="font-semibold text-lg sm:text-xl text-white flex justify-between items-center">Effect 1: Unscientific Structures <span class="plus-icon text-accent text-2xl">+</span></h3>
+                            <p id="effect-1" class="text-gray-400 font-light reveal-item text-sm sm:text-base">A lack of strategic planning leads to poor staffing, a critical skills gap, and a demoralized workforce unequipped for modern engagement. This directly impacts visitor experience and operational efficiency.</p>
+                        </div>
+                        <div class="bg-card border border-card p-6 rounded-lg shadow-md clickable-card" data-target="effect-2">
+                            <h3 class="font-semibold text-lg sm:text-xl text-white flex justify-between items-center">Effect 2: "Post-Digital" Failure <span class="plus-icon text-accent text-2xl">+</span></h3>
+                             <p id="effect-2" class="text-gray-400 font-light reveal-item text-sm sm:text-base">Superficial use of technology results in broken interactives and a failure to engage audiences beyond the physical walls. This limits reach and relevance in a connected world.</p>
+                        </div>
+                        <div class="bg-card border border-card p-6 rounded-lg shadow-md clickable-card" data-target="effect-3">
+                            <h3 class="font-semibold text-lg sm:text-xl text-white flex justify-between items-center">Effect 3: A Crisis of Relevance <span class="plus-icon text-accent text-2xl">+</span></h3>
+                             <p id="effect-3" class="text-gray-400 font-light reveal-item text-sm sm:text-base">The ultimate consequence is a profound disconnect from the public, rendering our valuable institutions non-essential to many and weakening their social and economic impact.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="footer-credit">K-MIEL Proposal</div>
+        </div>
+
+        <!-- Slide 5: Guiding Principles -->
+        <div id="slide-5" class="slide justify-center items-center">
+            <div class="max-w-4xl mx-auto w-full text-center">
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-white mb-10">Guiding Principles of K-MIEL</h2>
+                <div class="space-y-4 text-left stagger-reveal">
+                    <div class="bg-card p-5 rounded-lg shadow-sm border border-card"><p class="text-sm md:text-base text-gray-200"><span class="font-semibold text-accent">People, Not Objects:</span> The vital spirit of museums is the relationship between collections and people. We must shift focus from getting people to see objects, to tending our relationships with visitors and non-visitors alike.</p></div>
+                    <div class="bg-card p-5 rounded-lg shadow-sm border border-card" style="animation-delay: 0.1s;"><p class="text-sm md:text-base text-gray-200"><span class="font-semibold text-accent">Museums Must Change:</span> We must overcome exclusionary histories through critical examination and rigorous action. Change is not a one-off project, but an ongoing, necessary process.</p></div>
+                    <div class="bg-card p-5 rounded-lg shadow-sm border border-card" style="animation-delay: 0.2s;"><p class="text-sm md:text-base text-gray-200"><span class="font-semibold text-accent">Accountability to Communities:</span> Museums exist in public trust. We must build authentic relationships and be responsive to community needs, ensuring equal and fair treatment for all citizens.</p></div>
+                </div>
+            </div>
+            <div class="footer-credit">K-MIEL Proposal</div>
+        </div>
+        
+        <!-- Slide 6: The Tourism Opportunity -->
+        <div id="slide-6" class="slide justify-center items-center text-center bg-accent text-gray-900">
+            <div class="max-w-4xl mx-auto">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 md:h-20 w-16 md:w-20 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                <h2 class="font-display text-4xl md:text-6xl mb-6 text-white">A Strategic Investment in Tourism</h2>
+                <p class="text-lg md:text-2xl leading-relaxed font-light">Transforming museums into vibrant hubs is a direct investment in Kerala's brand. It provides new, compelling reasons for tourists to visit, extend their stay, and connect more deeply with our state, generating significant economic returns.</p>
+            </div>
+             <div class="footer-credit text-amber-900">K-MIEL Proposal</div>
+        </div>
+
+        <!-- Slide 7: The Solution -->
+        <div id="slide-7" class="slide justify-center items-center text-center">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="font-display text-4xl md:text-7xl text-white mb-4">The Solution: K-MIEL</h2>
+                <p class="text-lg md:text-2xl mb-8 font-light text-gray-300">A centralized, collaborative R&D hub for ALL of Kerala's museums.</p>
+                <div class="bg-card border border-card p-6 md:p-8 rounded-lg shadow-lg text-left grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    <div class="flex items-start space-x-4">
+                        <span class="text-accent text-xl md:text-2xl font-bold mt-1">&#10003;</span>
+                        <div><h3 class="font-semibold text-md md:text-lg text-white">A Shared Brain & Engine Room</h3><p class="font-light text-gray-400 text-sm md:text-base">This shared model is essential. Most of our museums find it financially and logistically unviable to maintain their own dedicated R&D structures. K-MIEL solves this.</p></div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                         <span class="text-accent text-xl md:text-2xl font-bold mt-1">&#10003;</span>
+                        <div><h3 class="font-semibold text-md md:text-lg text-white">An Institution That Listens</h3><p class="font-light text-gray-400 text-sm md:text-base">Crucially, the lab is not a top-down authority. It creates a two-way feedback loop, taking inputs from museums and the public to drive its research.</p></div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                         <span class="text-accent text-xl md:text-2xl font-bold mt-1">&#10003;</span>
+                        <div><h3 class="font-semibold text-md md:text-lg text-white">Authentic, Homegrown Insights</h3><p class="font-light text-gray-400 text-sm md:text-base">We must stop relying on visitor data from the West. K-MIEL will generate insights from our own people, making a progressive and truly authentic mark.</p></div>
+                    </div>
+                     <div class="flex items-start space-x-4">
+                         <span class="text-accent text-xl md:text-2xl font-bold mt-1">&#10003;</span>
+                        <div><h3 class="font-semibold text-md md:text-lg text-white">A Globally-Inspired Model</h3><p class="font-light text-gray-400 text-sm md:text-base">Inspired by pioneering international models like the Cooper Hewitt, Smithsonian Design Museum's Interaction Lab, K-MIEL will be the catalyst for transformation.</p></div>
+                    </div>
+                </div>
+            </div>
+             <div class="footer-credit">K-MIEL Proposal</div>
+        </div>
+
+        <!-- Slide 8: The Mission -->
+        <div id="slide-8" class="slide justify-center items-center text-center bg-card text-white">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-display text-4xl md:text-6xl mb-6">Our Mission</h2>
+                <p class="text-lg md:text-3xl leading-relaxed font-light text-gray-200">To decolonize our museum practices and pioneer a "post-digital" transformation by developing homegrown data, fostering radical collaboration, and making every institution a dynamic, inclusive, and indispensable community and tourism asset.</p>
+            </div>
+             <div class="footer-credit">K-MIEL Proposal</div>
+        </div>
+
+        <!-- Slide 9: Core Functions -->
+        <div id="slide-9" class="slide justify-center items-center">
+            <div class="max-w-6xl mx-auto w-full">
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-white text-center mb-12">Core Functions: A Dual Approach</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-card border border-card p-8 rounded-lg shadow-lg clickable-card" data-target="thinking-details">
+                        <h3 class="font-display text-2xl md:text-3xl text-accent mb-4 flex justify-between items-center">Tools for Thinking <span class="plus-icon text-2xl">+</span></h3>
+                        <p class="font-semibold text-lg text-white mb-2">(Strategic R&D)</p>
+                        <div id="thinking-details" class="reveal-item text-left font-light space-y-2 text-sm md:text-base text-gray-300">
+                             <p>&#9679; Develop homegrown audience insights to understand our communities.</p>
+                             <p>&#9679; Create frameworks for decolonizing narratives and participatory storytelling.</p>
+                             <p>&#9679; Design holistic "post-digital" roadmaps for genuine hybrid experiences.</p>
+                             <p>&#9679; Frame challenges by asking "How Might We..." design questions.</p>
+                        </div>
+                    </div>
+                    <div class="bg-card border border-card p-8 rounded-lg shadow-lg clickable-card" data-target="doing-details">
+                        <h3 class="font-display text-2xl md:text-3xl text-white mb-4 flex justify-between items-center">Tools for Doing <span class="plus-icon text-accent text-2xl">+</span></h3>
+                        <p class="font-semibold text-lg text-accent mb-2">(Capacity Building)</p>
+                         <div id="doing-details" class="reveal-item text-left font-light space-y-2 text-sm md:text-base text-gray-300">
+                            <p>&#9679; Provide a lab for rapid prototyping and low-cost testing of new ideas.</p>
+                            <p>&#9679; Lead development of a unified digital portal for Kerala's museums.</p>
+                            <p>&#9679; Deliver 21st-century skills training for digital confidence.</p>
+                            <p>&#9679; Offer scientific staffing and operational advisory.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="footer-credit">K-MIEL Proposal</div>
+        </div>
+        
+        <!-- Slide 10: Leadership & Structure -->
+        <div id="slide-10" class="slide justify-center items-center">
+            <div class="max-w-5xl mx-auto w-full">
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-white text-center mb-12">Structure: A Blueprint for Action</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 text-center">
+                    <div class="bg-card border border-card p-4 md:p-6 rounded-lg shadow-md"><h4 class="font-semibold text-white text-md md:text-lg">CXIO</h4><p class="text-xs md:text-sm font-light text-gray-400">Chief Experience & Innovation Officer</p></div>
+                    <div class="bg-card border border-card p-4 md:p-6 rounded-lg shadow-md"><h4 class="font-semibold text-white text-md md:text-lg">Lead, Research</h4><p class="text-xs md:text-sm font-light text-gray-400">Audience & Insights</p></div>
+                    <div class="bg-card border border-card p-4 md:p-6 rounded-lg shadow-md"><h4 class="font-semibold text-white text-md md:text-lg">Lead, Digital</h4><p class="text-xs md:text-sm font-light text-gray-400">Experience & Prototyping</p></div>
+                    <div class="bg-card border border-card p-4 md:p-6 rounded-lg shadow-md"><h4 class="font-semibold text-white text-md md:text-lg">Lead, Community</h4><p class="text-xs md:text-sm font-light text-gray-400">Engagement & Co-Creation</p></div>
+                    <div class="bg-card border border-card p-4 md:p-6 rounded-lg shadow-md"><h4 class="font-semibold text-white text-md md:text-lg">Lab Coordinator</h4><p class="text-xs md:text-sm font-light text-gray-400">Operations & Admin</p></div>
+                    <div class="bg-accent text-gray-900 p-4 md:p-6 rounded-lg shadow-md"><h4 class="font-semibold text-md md:text-lg">Interns & Fellows</h4><p class="text-xs md:text-sm font-light">The Talent Pipeline</p></div>
+                </div>
+            </div>
+             <div class="footer-credit">K-MIEL Proposal</div>
+        </div>
+
+        <!-- Slide 11: Call to Action & Sustainability -->
+        <div id="slide-11" class="slide justify-center items-center">
+            <div class="max-w-5xl mx-auto w-full">
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-white text-center mb-10">Call to Action & A Sustainable Path</h2>
+                <div class="bg-card border border-card p-6 md:p-8 rounded-lg shadow-xl mb-8">
+                    <p class="text-lg md:text-xl text-center font-light text-gray-200">We urge the Government of Kerala to take the initiative in establishing this lab, appointing a founding team, and launching pilot programs.</p>
+                </div>
+                <h3 class="text-xl md:text-2xl font-semibold text-center text-accent mb-6">A Diversified Sustainability Plan</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-card border border-card p-4 rounded-lg clickable-card" data-target="sustain-1"><h4 class="font-semibold text-white flex justify-between items-center">Core State Partnership <span class="plus-icon text-accent text-xl">+</span></h4><p id="sustain-1" class="text-gray-400 font-light reveal-item text-sm">Continued baseline funding from the Government of Kerala, recognizing K-MIEL as essential infrastructure for the state's cultural and tourism sectors.</p></div>
+                    <div class="bg-card border border-card p-4 rounded-lg clickable-card" data-target="sustain-2"><h4 class="font-semibold text-white flex justify-between items-center">National R&D Grants <span class="plus-icon text-accent text-xl">+</span></h4><p id="sustain-2" class="text-gray-400 font-light reveal-item text-sm">Proactively seek competitive R&D funding from Government of India bodies such as the Ministry of Culture and the Ministry of Science & Technology for projects focused on digital innovation and cultural analytics.</p></div>
+                    <div class="bg-card border border-card p-4 rounded-lg clickable-card" data-target="sustain-3"><h4 class="font-semibold text-white flex justify-between items-center">Museum Membership Model <span class="plus-icon text-accent text-xl">+</span></h4><p id="sustain-3" class="text-gray-400 font-light reveal-item text-sm">Establish a tiered annual membership fee for participating museums. This creates a sustainable revenue stream and ensures the lab remains accountable to the institutions it serves.</p></div>
+                    <div class="bg-card border border-card p-4 rounded-lg clickable-card" data-target="sustain-4"><h4 class="font-semibold text-white flex justify-between items-center">Generated Revenue <span class="plus-icon text-accent text-xl">+</span></h4><p id="sustain-4" class="text-gray-400 font-light reveal-item text-sm">Develop a revenue-generating arm by offering paid, high-level consultancy services and specialized training workshops to corporate clients, private foundations, and institutions outside of Kerala.</p></div>
+                </div>
+            </div>
+             <div class="footer-credit">K-MIEL Proposal</div>
+        </div>
+
+        <!-- Slide 12: Closing -->
+        <div id="slide-12" class="slide justify-center items-center text-center bg-primary text-white">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-display text-4xl md:text-6xl mb-6">Let us make the shift.</h2>
+                <p class="text-xl md:text-3xl leading-relaxed font-light">From merely building museums to building living, breathing, and beloved cultural experiences for the people of Kerala and the world.</p>
+                <p class="mt-12 text-lg opacity-80">Thank You.</p>
+            </div>
+             <div class="footer-credit text-gray-400">© 2025 Sethu S Kumar. All Rights Reserved.</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="fixed top-1/2 right-0 transform -translate-y-1/2 p-2 sm:p-4 flex flex-col items-center space-y-2 sm:space-y-4 pointer-events-none">
+        <div class="pointer-events-auto">
+            <button id="prev-btn" class="bg-black bg-opacity-50 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center hover:bg-opacity-75 disabled:opacity-30 disabled:cursor-not-allowed transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /></svg>
+            </button>
+        </div>
+        <div id="slide-counter" class="text-xs sm:text-sm bg-black bg-opacity-50 text-white px-3 py-1 rounded-full pointer-events-auto font-mono">1/12</div>
+        <div class="pointer-events-auto">
+            <button id="next-btn" class="bg-black bg-opacity-50 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center hover:bg-opacity-75 disabled:opacity-30 disabled:cursor-not-allowed transition-opacity">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            </button>
+        </div>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const slideCounter = document.getElementById('slide-counter');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            slideCounter.textContent = `${index + 1}/${totalSlides}`;
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === totalSlides - 1;
+
+            // Trigger staggered animations on specific slides
+            if (slides[index].querySelector('.stagger-reveal')) {
+                const elements = slides[index].querySelectorAll('.stagger-reveal > *');
+                elements.forEach((el, i) => {
+                    el.style.animationDelay = `${i * 0.1}s`;
+                    el.classList.add('animated');
+                });
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Interactive reveal for cards
+        const clickableCards = document.querySelectorAll('.clickable-card');
+        clickableCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const targetId = card.dataset.target;
+                const targetElement = document.getElementById(targetId);
+                const iconElement = card.querySelector('.plus-icon');
+                if (targetElement) {
+                    targetElement.classList.toggle('revealed');
+                    if(iconElement) {
+                        iconElement.classList.toggle('open');
+                    }
+                }
+            });
+        });
+
+        showSlide(currentSlide);
+    });
+</script>
+
+</body>
+</html>
