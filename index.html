@@ -20,12 +20,14 @@
         .slide {
             display: none;
             min-height: 100vh;
+            height: 100vh; /* Set explicit height */
             width: 100%;
             padding: 6rem 1.5rem; 
             align-items: center;
             justify-content: center;
             position: relative;
             flex-direction: column;
+            overflow-y: auto; /* Allow vertical scrolling if content overflows */
         }
         @media (min-width: 768px) {
             .slide {
