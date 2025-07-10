@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K-MIEL: Project Pitch Presentation</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -24,7 +25,8 @@
             width: 100%;
             padding: 2rem 1.5rem 8rem 1.5rem; /* Added bottom padding for nav */
             align-items: center;
-            justify-content: center;
+            /* Justify-start ensures content is not cut off at the top when scrolling */
+            justify-content: flex-start; 
             position: relative;
             flex-direction: column;
             overflow-y: auto; /* Allow vertical scrolling if content overflows */
@@ -32,6 +34,7 @@
         @media (min-width: 768px) {
             .slide {
                 padding: 3rem 2rem;
+                 justify-content: center; /* Center content on larger screens */
             }
         }
         .slide.active {
@@ -92,6 +95,14 @@
             transform: translateY(10px);
             animation: fadeIn 0.5s forwards;
         }
+        /* Wrapper to handle vertical centering on larger screens */
+        .slide-content-wrapper {
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             width: 100%;
+             flex-grow: 1;
+        }
     </style>
 </head>
 <body class="overflow-hidden">
@@ -99,8 +110,8 @@
     <div id="presentation-container" class="relative">
         <!-- Slide 1: Title & Author -->
         <div id="slide-1" class="slide active">
-            <div class="flex-grow w-full flex flex-col justify-center items-center text-center">
-                <div class="max-w-4xl mx-auto">
+            <div class="slide-content-wrapper">
+                <div class="max-w-4xl mx-auto text-center">
                     <h1 class="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl mb-4 text-white">K-MIEL</h1>
                     <p class="text-xl sm:text-2xl md:text-3xl mb-12 text-gray-300 font-light">Kerala Museum Innovation & Experience Lab</p>
                     <div class="border-t border-gray-700 pt-8 md:pt-10">
@@ -117,22 +128,61 @@
             <div class="footer-credit">© 2025 Sethu S Kumar. All Rights Reserved.</div>
         </div>
 
-        <!-- Slide 2: The Hook -->
+        <!-- Slide 2: The Landscape (UPDATED) -->
         <div id="slide-2" class="slide">
-            <div class="flex-grow w-full flex flex-col justify-center items-center text-center">
-                <div class="max-w-4xl mx-auto">
+            <div class="slide-content-wrapper">
+                <div class="max-w-6xl mx-auto w-full text-center">
+                    <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-white mb-2">The Kerala Museum Landscape</h2>
+                    <p class="text-gray-400 mb-6">An ongoing research project by Interactive Museum Consultants</p>
+                     <div class="flex justify-center items-center space-x-4 md:space-x-8 mb-8 text-center stagger-reveal">
+                        <div class="bg-card border border-card p-4 rounded-lg">
+                            <p class="font-display text-3xl md:text-4xl text-accent">40+</p>
+                            <p class="mt-1 text-gray-300 text-sm">Museums Surveyed</p>
+                        </div>
+                        <div class="bg-card border border-card p-4 rounded-lg" style="animation-delay: 0.1s;">
+                            <p class="font-display text-3xl md:text-4xl text-accent">10+</p>
+                            <p class="mt-1 text-gray-300 text-sm">Upcoming Projects</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 stagger-reveal" style="animation-delay: 0.2s;">
+                        <div class="bg-card border border-card p-4 rounded-lg">
+                            <h3 class="font-semibold text-lg text-white mb-2">By District</h3>
+                            <div class="h-48"><canvas id="district-chart"></canvas></div>
+                        </div>
+                        <div class="bg-card border border-card p-4 rounded-lg" style="animation-delay: 0.1s;">
+                            <h3 class="font-semibold text-lg text-white mb-2">By Category</h3>
+                            <div class="h-48"><canvas id="category-chart"></canvas></div>
+                        </div>
+                        <div class="bg-card border border-card p-4 rounded-lg" style="animation-delay: 0.2s;">
+                           <h3 class="font-semibold text-lg text-white mb-2">By Ownership</h3>
+                            <div class="h-48"><canvas id="ownership-chart"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="bg-card border-2 border-accent p-6 rounded-lg shadow-lg stagger-reveal" style="animation-delay: 0.5s;">
+                        <h3 class="font-semibold text-lg md:text-xl text-white">THE REALITY: THIS IS JUST THE BEGINNING.</h3>
+                        <p class="mt-2 font-light text-gray-400">This preliminary data only scratches the surface. We lack a complete, official survey of all museums. We don't know exactly how many are functioning, how well they are functioning, and most critically, we have almost no data on their visitors. This is the knowledge void K-MIEL will fill.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-credit">K-MIEL Proposal</div>
+        </div>
+
+        <!-- Slide 3: The Hook -->
+        <div id="slide-3" class="slide">
+            <div class="slide-content-wrapper">
+                <div class="max-w-4xl mx-auto text-center">
                     <h2 class="font-display text-4xl md:text-6xl text-white mb-6">A Disturbing Question</h2>
-                    <p class="text-lg md:text-2xl leading-relaxed mb-8 text-gray-300">Across Kerala, many of our own citizens are unaware of the museums in their vicinity.</p>
+                    <p class="text-lg md:text-2xl leading-relaxed mb-8 text-gray-300">Given what we don't know, we must ask: are our museums truly serving the public?</p>
                     <p class="text-3xl md:text-5xl font-bold text-accent p-6 bg-card rounded-lg shadow-lg">Who are our museums for?</p>
                 </div>
             </div>
             <div class="footer-credit">K-MIEL Proposal</div>
         </div>
 
-        <!-- Slide 3: The Core Problem -->
-        <div id="slide-3" class="slide">
-            <div class="flex-grow w-full flex flex-col justify-center items-center text-center">
-                <div class="max-w-4xl mx-auto">
+        <!-- Slide 4: The Core Problem -->
+        <div id="slide-4" class="slide">
+            <div class="slide-content-wrapper">
+                <div class="max-w-4xl mx-auto text-center">
                     <h2 class="font-display text-4xl md:text-6xl text-white mb-6">The Foundational Flaw</h2>
                     <div class="bg-card p-8 md:p-12 rounded-lg shadow-xl border border-card">
                         <p class="text-xl md:text-3xl font-semibold text-accent mb-4">"Our thinking about museums concludes with their construction, when it should begin there."</p>
@@ -143,9 +193,9 @@
             <div class="footer-credit">K-MIEL Proposal</div>
         </div>
 
-        <!-- Slide 4: The Cause & Consequences -->
-        <div id="slide-4" class="slide">
-             <div class="flex-grow w-full flex flex-col justify-center items-center">
+        <!-- Slide 5: The Cause & Consequences -->
+        <div id="slide-5" class="slide">
+             <div class="slide-content-wrapper">
                 <div class="max-w-6xl mx-auto w-full">
                     <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-white text-center mb-12">The Crisis & Its Consequences</h2>
                     <div class="grid md:grid-cols-2 gap-8">
@@ -174,9 +224,9 @@
             <div class="footer-credit">K-MIEL Proposal</div>
         </div>
 
-        <!-- Slide 5: Guiding Principles -->
-        <div id="slide-5" class="slide">
-            <div class="flex-grow w-full flex flex-col justify-center items-center">
+        <!-- Slide 6: Guiding Principles -->
+        <div id="slide-6" class="slide">
+            <div class="slide-content-wrapper">
                 <div class="max-w-4xl mx-auto w-full text-center">
                     <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-white mb-10">Guiding Principles of K-MIEL</h2>
                     <div class="space-y-4 text-left stagger-reveal">
@@ -189,10 +239,10 @@
             <div class="footer-credit">K-MIEL Proposal</div>
         </div>
         
-        <!-- Slide 6: The Tourism Opportunity -->
-        <div id="slide-6" class="slide bg-accent text-gray-900">
-            <div class="flex-grow w-full flex flex-col justify-center items-center text-center">
-                <div class="max-w-4xl mx-auto">
+        <!-- Slide 7: The Tourism Opportunity -->
+        <div id="slide-7" class="slide bg-accent text-gray-900">
+            <div class="slide-content-wrapper">
+                <div class="max-w-4xl mx-auto text-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-16 md:h-20 w-16 md:w-20 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
                     <h2 class="font-display text-4xl md:text-6xl mb-6 text-white">A Strategic Investment in Tourism</h2>
                     <p class="text-lg md:text-2xl leading-relaxed font-light">Transforming museums into vibrant hubs is a direct investment in Kerala's brand. It provides new, compelling reasons for tourists to visit, extend their stay, and connect more deeply with our state, generating significant economic returns.</p>
@@ -201,10 +251,10 @@
             <div class="footer-credit text-amber-900">K-MIEL Proposal</div>
         </div>
 
-        <!-- Slide 7: The Solution -->
-        <div id="slide-7" class="slide">
-            <div class="flex-grow w-full flex flex-col justify-center items-center text-center">
-                <div class="max-w-5xl mx-auto">
+        <!-- Slide 8: The Solution -->
+        <div id="slide-8" class="slide">
+            <div class="slide-content-wrapper">
+                <div class="max-w-5xl mx-auto text-center">
                     <h2 class="font-display text-4xl md:text-7xl text-white mb-4">The Solution: K-MIEL</h2>
                     <p class="text-lg md:text-2xl mb-8 font-light text-gray-300">A centralized, collaborative R&D hub for ALL of Kerala's museums.</p>
                     <div class="bg-card border border-card p-6 md:p-8 rounded-lg shadow-lg text-left grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
@@ -230,10 +280,10 @@
             <div class="footer-credit">K-MIEL Proposal</div>
         </div>
 
-        <!-- Slide 8: The Mission -->
-        <div id="slide-8" class="slide bg-card text-white">
-            <div class="flex-grow w-full flex flex-col justify-center items-center text-center">
-                <div class="max-w-4xl mx-auto">
+        <!-- Slide 9: The Mission -->
+        <div id="slide-9" class="slide bg-card text-white">
+            <div class="slide-content-wrapper">
+                <div class="max-w-4xl mx-auto text-center">
                     <h2 class="font-display text-4xl md:text-6xl mb-6">Our Mission</h2>
                     <p class="text-lg md:text-3xl leading-relaxed font-light text-gray-200">To decolonize our museum practices and pioneer a "post-digital" transformation by developing homegrown data, fostering radical collaboration, and making every institution a dynamic, inclusive, and indispensable community and tourism asset.</p>
                 </div>
@@ -241,9 +291,9 @@
             <div class="footer-credit">K-MIEL Proposal</div>
         </div>
 
-        <!-- Slide 9: Core Functions -->
-        <div id="slide-9" class="slide">
-            <div class="flex-grow w-full flex flex-col justify-center items-center">
+        <!-- Slide 10: Core Functions -->
+        <div id="slide-10" class="slide">
+            <div class="slide-content-wrapper">
                 <div class="max-w-6xl mx-auto w-full">
                     <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-white text-center mb-12">Core Functions: A Dual Approach</h2>
                     <div class="grid md:grid-cols-2 gap-8">
@@ -273,9 +323,9 @@
             <div class="footer-credit">K-MIEL Proposal</div>
         </div>
         
-        <!-- Slide 10: Leadership & Structure -->
-        <div id="slide-10" class="slide">
-            <div class="flex-grow w-full flex flex-col justify-center items-center">
+        <!-- Slide 11: Leadership & Structure -->
+        <div id="slide-11" class="slide">
+            <div class="slide-content-wrapper">
                 <div class="max-w-5xl mx-auto w-full">
                     <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-white text-center mb-12">Structure: A Blueprint for Action</h2>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 text-center">
@@ -291,9 +341,9 @@
             <div class="footer-credit">K-MIEL Proposal</div>
         </div>
 
-        <!-- Slide 11: Call to Action & Sustainability -->
-        <div id="slide-11" class="slide">
-            <div class="flex-grow w-full flex flex-col justify-center items-center">
+        <!-- Slide 12: Call to Action & Sustainability -->
+        <div id="slide-12" class="slide">
+            <div class="slide-content-wrapper">
                 <div class="max-w-5xl mx-auto w-full">
                     <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-white text-center mb-10">Call to Action & A Sustainable Path</h2>
                     <div class="bg-card border border-card p-6 md:p-8 rounded-lg shadow-xl mb-8">
@@ -311,9 +361,9 @@
             <div class="footer-credit">K-MIEL Proposal</div>
         </div>
 
-        <!-- Slide 12: Closing -->
-        <div id="slide-12" class="slide justify-center items-center text-center bg-primary text-white">
-            <div class="flex-grow w-full flex flex-col justify-center items-center">
+        <!-- Slide 13: Closing -->
+        <div id="slide-13" class="slide justify-center items-center text-center bg-primary text-white">
+            <div class="slide-content-wrapper">
                 <div class="max-w-4xl mx-auto">
                     <h2 class="font-display text-4xl md:text-6xl mb-6">Let us make the shift.</h2>
                     <p class="text-xl md:text-3xl leading-relaxed font-light">From merely building museums to building living, breathing, and beloved cultural experiences for the people of Kerala and the world.</p>
@@ -330,7 +380,7 @@
             <button id="prev-btn" class="text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
             </button>
-            <div id="slide-counter" class="text-sm text-white px-3 py-1 font-mono">1/12</div>
+            <div id="slide-counter" class="text-sm text-white px-3 py-1 font-mono">1/13</div>
             <button id="next-btn" class="text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition">
                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
             </button>
@@ -339,12 +389,114 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // --- DATA SOURCE ---
+        const museumData = [
+            { 'District': 'Thiruvananthapuram', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Ernakulam', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Ernakulam', 'Category': 'Arts & Culture', 'Ownership': 'Private' },
+            { 'District': 'Malappuram', 'Category': 'Science & Technology', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Kannur', 'Category': 'History & Heritage', 'Ownership': 'Trust' },
+            { 'District': 'Ernakulam', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Wayanad', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Kannur', 'Category': 'History & Heritage', 'Ownership': 'Trust' },
+            { 'District': 'Kottayam', 'Category': 'Arts & Culture', 'Ownership': 'Co-operative Society' },
+            { 'District': 'Thrissur', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Kottayam', 'Category': 'Arts & Culture', 'Ownership': 'Private' },
+            { 'District': 'Ernakulam', 'Category': 'History & Heritage', 'Ownership': 'Trust' },
+            { 'District': 'Thiruvananthapuram', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Thiruvananthapuram', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Kozhikode', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Alappuzha', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Thiruvananthapuram', 'Category': 'History & Heritage', 'Ownership': 'Trust' },
+            { 'District': 'Kozhikode', 'Category': 'Arts & Culture', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Alappuzha', 'Category': 'Arts & Culture', 'Ownership': 'Private' },
+            { 'District': 'Kollam', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Thiruvananthapuram', 'Category': 'Science & Technology', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Thrissur', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Thiruvananthapuram', 'Category': 'Arts & Culture', 'Ownership': 'Private' },
+            { 'District': 'Thrissur', 'Category': 'Science & Technology', 'Ownership': 'Private' },
+            { 'District': 'Malappuram', 'Category': 'Arts & Culture', 'Ownership': 'Trust' },
+            { 'District': 'Ernakulam', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Ernakulam', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Ernakulam', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Ernakulam', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Ernakulam', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Thrissur', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Pathanamthitta', 'Category': 'History & Heritage', 'Ownership': 'Trust' },
+            { 'District': 'Ernakulam', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Kollam', 'Category': 'Arts & Culture', 'Ownership': 'Private' },
+            { 'District': 'Ernakulam', 'Category': 'Arts & Culture', 'Ownership': 'Trust' },
+            { 'District': 'Ernakulam', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Ernakulam', 'Category': 'History & Heritage', 'Ownership': 'Govt. of India' },
+            { 'District': 'Thiruvananthapuram', 'Category': 'Arts & Culture', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Kozhikode', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Alappuzha', 'Category': 'History & Heritage', 'Ownership': 'Govt. of Kerala' },
+            { 'District': 'Alappuzha', 'Category': 'Science & Technology', 'Ownership': 'Govt. of India' },
+        ];
+
+
         const slides = document.querySelectorAll('.slide');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const slideCounter = document.getElementById('slide-counter');
         let currentSlide = 0;
         const totalSlides = slides.length;
+        let charts = {};
+
+        function getCounts(data, key) {
+            return data.reduce((acc, item) => {
+                acc[item[key]] = (acc[item[key]] || 0) + 1;
+                return acc;
+            }, {});
+        }
+
+        function createChart(canvasId, label, data) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            if (charts[canvasId]) {
+                charts[canvasId].destroy();
+            }
+            charts[canvasId] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(data),
+                    datasets: [{
+                        label: label,
+                        data: Object.values(data),
+                        backgroundColor: '#FBBF24',
+                        borderColor: '#FBBF24',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { 
+                        x: { 
+                            beginAtZero: true, 
+                            ticks: { color: '#9CA3AF', stepSize: 1 },
+                            grid: { color: '#374151' }
+                        },
+                        y: {
+                            ticks: { color: '#D1D5DB' },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initCharts() {
+            const districtData = getCounts(museumData, 'District');
+            const categoryData = getCounts(museumData, 'Category');
+            const ownershipData = getCounts(museumData, 'Ownership');
+            
+            createChart('district-chart', 'Museums by District', districtData);
+            createChart('category-chart', 'Museums by Category', categoryData);
+            createChart('ownership-chart', 'Museums by Ownership', ownershipData);
+        }
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
@@ -354,13 +506,16 @@
             prevBtn.disabled = index === 0;
             nextBtn.disabled = index === totalSlides - 1;
 
-            // Trigger staggered animations on specific slides
             if (slides[index].querySelector('.stagger-reveal')) {
                 const elements = slides[index].querySelectorAll('.stagger-reveal > *');
                 elements.forEach((el, i) => {
                     el.style.animationDelay = `${i * 0.1}s`;
                     el.classList.add('animated');
                 });
+            }
+
+            if (slides[index].querySelector('#district-chart')) {
+                setTimeout(initCharts, 100); // Delay to ensure canvas is visible
             }
         }
 
@@ -381,7 +536,6 @@
         nextBtn.addEventListener('click', nextSlide);
         prevBtn.addEventListener('click', prevSlide);
         
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
                 e.preventDefault();
@@ -392,7 +546,6 @@
             }
         });
 
-        // Interactive reveal for cards
         const clickableCards = document.querySelectorAll('.clickable-card');
         clickableCards.forEach(card => {
             card.addEventListener('click', () => {
